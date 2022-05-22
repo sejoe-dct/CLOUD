@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>logout</title>
+</head>
+<body>
+
+here is main Page from "/"
+
+<a th:href="@{/foods}" >맛집 게시글 보러 가기</a><br><br>
+
+
+    <a  th:href="@{/login}" sec:authorize="!isAuthenticated()">로그인 및 회원가입하러 가기</a>
+
+    <form sec:authorize="isAuthenticated()">
+        <div th:object="${session.user}">
+            <p>DB_ID: <span th:text="*{getDb_id()}"></span></p>
+            <p>USER_NAME: <span th:text="*{getName()}"></span></p>
+            <p>USER_NICKNAME: <span th:text="*{getNickname()}"></span></p>
+            <p>USER_EMAIL: <span th:text="*{getEmail()}"></span></p>
+        </div>
+
+        <a th:href="@{/myPage}" >마이 페이지</a><br><br>
+
+        <a href="/logout">
+            로그아웃
+        </a>
+
+
+    </form>
+
+
+
+
+
+
+
+</body>
+</html>

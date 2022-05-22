@@ -1,0 +1,38 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>로그인을 위한 페이지</title>
+</head>
+<body>
+<h1> 로그인 페이지!</h1>
+
+    <form action="/loginProcess" method="POST"> <!--security config에서  .loginProcessingUrl("/login") 설정으로 시큐리티에게 로그인 과정을 맡기기 때문에 , 동일한 주소로 한다. 즉 우선권은 security config 설정 값에 우선순위가 있다. method는 무조건 post이다.-->
+        <input type="text" name="username" placeholder="Username 입력" /><br> <!--해당 name 속성의 "username"은 loadUserByUsername()의 파리미터 이름이랑 동일해야 한다. 변경을 원하는 경우 Security Config에서 수정해야 한다. 그래서 로그인 하는 Form에서는 반드시 loginId의 이름 속성을 "username"으로 한다. -->
+        <input type="password" name="password" placeholder="Password 입력" /><br>
+        <button>로그인</button>
+    </form>
+    <a href="/join">회원가입을 아직 하지 않으셨나요??</a>
+
+
+<!--비밀번호 일치 하지 않을때 js -->
+<script>
+
+    window.onload = function() {
+
+        var alertmsg="[[${alertmsg}]]";
+
+        if (alertmsg) {
+            alert(alertmsg);
+            window.location.href = "/login"
+        }
+
+    }
+
+</script>
+
+
+
+</body>
+</html>

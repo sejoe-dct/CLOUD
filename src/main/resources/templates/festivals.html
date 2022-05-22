@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="KO" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>festivals</title>
+</head>
+<body>
+<p> festival 게시글입니다.</p>
+
+<a th:href="@{/admin/festival/save}">행사 등록하러가기</a>
+
+<!--아래 js는 행사 게시글 첫 화면에 반드시 있어야한다. -->
+<script th:inline="javascript">
+    window.onload = function() {
+        var nextPage = [[@{__${nextPage}__}]];
+            var msg = "[(${msg})]";
+        if(msg) {
+            alert(msg);
+            location.href = nextPage;
+        }
+    }
+</script>
+
+
+</body>
+</html>
