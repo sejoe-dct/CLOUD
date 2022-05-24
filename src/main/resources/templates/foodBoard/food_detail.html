@@ -1,35 +1,8 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
-
-@sejoe-dct
-sejoe-dct
-/
-CLOUD
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-CLOUD/src/main/resources/templates/foodBoard/food_register.html
-@sejoe-dct
-sejoe-dct Initial commit
-…
-Latest commit bcdb017 12 hours ago
-History
-1 contributor
-265 lines (233 sloc)  12.7 KB
-
 <!DOCTYPE html>
-<html lang="en">
+<!--<html lang="en">-->
+
+<html lang="en" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 
 <head>
     <meta charset="utf-8">
@@ -39,7 +12,7 @@ History
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link th:href="@{static/img/cloud.ico}" rel="icon">
+    <link th:href="@{/img/cloud.ico}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,6 +33,22 @@ History
 
     <!-- Template Stylesheet -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
+    <link th:href="@{/css/test.css}" rel="stylesheet">
+<!--    <link th:href="@{/css/detail.css}" rel="stylesheet">-->
+
+    <!-- 게시판 -->
+    <!--
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    -->
+
+    <!-- 검색창 -->
+    <!--    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+    <!--    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>-->
+    <!--    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+
+
 </head>
 
 <body>
@@ -102,6 +91,7 @@ History
 <!-- Topbar End -->
 
 
+
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
     <a href="index.html" class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
@@ -112,13 +102,10 @@ History
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="map.html" class="nav-item nav-link">지도</a>
-                <a th:href="@{/festivals}" class="nav-item nav-link">행사/축제</a>
-                <a th:href="@{/foods}" class="nav-item nav-link">맛집</a>
-                <a href="covid.html" class="nav-item nav-link">코로나현황/날씨</a>
-
-            </div>
+            <a href="map.html" class="nav-item nav-link">지도</a>
+            <a th:href="@{/ttest}" class="nav-item nav-link">행사/축제</a>
+            <a th:href="@{/foods}" class="nav-item nav-link">맛집</a>
+            <a href="covid.html" class="nav-item nav-link">코로나현황/날씨</a>
 
         </div>
 
@@ -129,85 +116,143 @@ History
 <!-- Navbar End -->
 
 
-<!-- Page Header Start -->
-<!--<div class="container-fluid page-header py-5 mb-5">-->
-<!--    <div class="container py-5">-->
-<!--        <h1 class="display-3 text-white mb-3 animated slideInDown">Projects</h1>-->
-<!--        <nav aria-label="breadcrumb animated slideInDown">-->
-<!--            <ol class="breadcrumb">-->
-<!--                <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>-->
-<!--                <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>-->
-<!--                <li class="breadcrumb-item text-white active" aria-current="page">Projects</li>-->
-<!--            </ol>-->
-<!--        </nav>-->
-<!--    </div>-->
-<!--</div>-->
-
-
+<!-- 게시판 Start -->
 <div class="container-xxl py-5">
     <div class="container">
-        <!-- 제목 / 소제목 -->
-        <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h6 class="text-primary">축제 및 행사 등록하기</h6>
-            <h1 class="mb-4">행사 및 축제 등록</h1>
-        </div>
+        <div class="container bootstrap snippets bootdey" >
+            <div class="row" >
+                <div class="col-md-6">
+                    <div class="pro-img-details" >
+<!--                        <img src="https://via.placeholder.com/550x380/FFB6C1/000000" alt="">-->
+                        <img th:each="imageFile : ${foodBoard.attachedFiles}"
+                             th:src="@{/images/{imageFile}(imageFile=${imageFile.storeFilename})}" width="70%" height="70%" style="margin-right: 5px"/>
 
-        <form th:action="@{/foodForm}" th:object="${foodBoard}" method="post" enctype="multipart/form-data">
-            <div class="row g-3">
-                <div class="col-12">
-                    <input type="text" class="form-control border-0" id="title" th:field="*{title}" placeholder="식당이름" style="height: 55px;">
+                    </div>
+                    <!--<div class="pro-img-list" style="padding: 10px;">
+                        <a href="#">
+                            <img src="https://via.placeholder.com/115x100/87CEFA/000000" alt="">
+                        </a>
+                        <a href="#">
+                            <img src="https://via.placeholder.com/115x100/FF7F50/000000" alt="">
+                        </a>
+                        <a href="#">
+                            <img src="https://via.placeholder.com/115x100/20B2AA/000000" alt="">
+                        </a>
+                        <a href="#">
+                            <img src="https://via.placeholder.com/120x100/20B2AA/000000" alt="">
+                        </a>
+                    </div>-->
                 </div>
-                <div class="col-12">
-                    <input type="text" class="form-control border-0" id="preview" th:field="*{preview}" placeholder="식당 한줄 소개" style="height: 55px;">
-                </div>
-                <div class="col-12">
-                    <input type="text" class="form-control border-0" id="address" th:field="*{address}" placeholder="식당 주소" style="height: 55px;">
-                </div>
+                <div class="col-sm-6 push-bit" style="padding: 10px;">
+                    <div class="clearfix" th:object="${foodBoard}"  enctype="multipart/form-data" >
+<!--                        <div class="pull-right">-->
+<!--                            <span class="h2"><strong>$ 69</strong></span>-->
+<!--                        </div>-->
 
-                <div class="col-12">
-                    <label>사진 업로드</label>
-                    <input type="file" name="file" class="form-control border-0" id="imageFiles" th:field="*{imageFiles}" placeholder="행사소개 이미지" style="height: 55px;">
-                    <!--                        <input type="file" name="file">-->
-                    <!--                        <input type="submit" value="Upload">-->
-                </div>
-                <div class="form-group">
-                    <label>맛집 위치 지역 선택</label>
-                    <select class="form-select" th:field="*{locationType}">
-                        <option value=""> 선택 </option>
-                        <option th:each="val : ${locationTypeList}"
-                                th:value="${val.id}"
-                                th:text="${val.type}"></option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>맛집 음식 유형 선택</label>
-                    <select class="form-select"  th:field="*{foodType}">
-                        <option value=""> 선택 </option>
-                        <option th:each="val : ${foodTypeList}"
-                                th:value="${val.id}"
-                                th:utext="${val.type}"></option>
-                    </select>
-                </div>
+                        <span class="h4" >
 
-                <div class="col-12">
-                    <label>내용</label>
-                    <textarea class="form-control" placeholder="Leave a comment here" id="info" style="height: 100px"
-                              th:field="*{info}"></textarea>
-                </div>
+                    <h3  class="text-success" th:text="*{title}">맛집 제목</h3><br />
+<!--                    <h6  th:text="*{preview}" ></h6>-->
+                        </span>
 
-                <div class="col-12">
-                    <label>평점</label>
-                    <input type="text" class="form-control" id="rate" placeholder="평점" th:field="*{rate}">
-                </div>
-                <div class="col-12" >
-                    <button class="btn btn-primary rounded-pill py-3 px-5" type="submit">Submit</button>
+<!--                    <hr />-->
+                        <div class="text-end">
+                            <p  th:text="*{address}"></p>
+                        </div>
+                    <hr />
+                        <h6  th:text="*{info}" ></h6>
+<!--                    <form action="" method="post" class="form-inline push-bit text-right">-->
+<!--                        <select id="ecom-addcart-size" name="ecom-addcart-size" class="form-control" size="1">-->
+<!--                            <option value="0" disabled="" selected="">SIZE</option>-->
+<!--                            <option value="xs">XS</option>-->
+<!--                            <option value="s">S</option>-->
+<!--                            <option value="m">M</option>-->
+<!--                            <option value="l">L</option>-->
+<!--                            <option value="xl">XL</option>-->
+<!--                            <option value="xxl">XXL</option>-->
+<!--                        </select>-->
+<!--                        <button type="submit" class="btn btn-info">Add to Cart</button>-->
+<!--                    </form>-->
+
                 </div>
             </div>
-        </form>
+        </div>
+        <!-- detail End -->
+
+        <hr/>
+        <!-- 댓글 Start -->
+            <!-- <div>
+                    <input type="text" class="form-control border-0" id="cmt" placeholder="댓글을 입력하세요" style="height: 45px;">
+                    <a type="button" class="btn btn-outline-primary" >등록</a>
+            </div>
+
+            <hr/>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">댓글 내용</th>
+                    <th scope="col">작성자 (닉네임)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cmts ,i : ${foodCmts}">
+                    <th th:text="${i.count}"></th>
+                    <th th:text="${cmts.foodCmt}"></th>
+                    <th th:text="${cmts.user.nickname}"></th>
+                </tr>
+            </table>-->
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+            <div class="container bootdey">
+                <div class="col-md-12 bootstrap snippets">
+                    <div class="form-group">
+
+
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div th:object="${foodCmtDto}">
+                                <form  th:action="@{/foods/{id}(id=${foodBoard.id})}"  method="post">
+                            <textarea type="text" th:field="*{cmt}" class="form-control" rows="2" placeholder="댓글을 남겨주세요"></textarea>
+                            <div class="mar-top clearfix">
+                                <button style="margin-top: 5px" class="btn btn-sm btn-primary pull-right" type="submit"><i class="fa fa-pencil fa-fw"></i> Share</button>
+                            </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+
+                    <div class="panel">
+                        <div class="panel-body">
+                            <!-- Newsfeed Content -->
+                            <!--===================================================-->
+                            <div class="media-block">
+                                <div class="media-body" th:each="cmts ,i : ${foodCmts}">
+                                    <div class="mar-btm">
+                                        <h2 href="#" class="btn-link text-semibold media-heading box-inline" th:text="${cmts.user.nickname}">Lisa D.</h2>
+                                    </div>
+                                    <p th:text="${cmts.foodCmt}"></p>
+
+                                    <hr>
+
+                                    <!-- Comments -->
+                                </div>
+                            </div>
+                            <!--===================================================-->
+                            <!-- End Newsfeed Content -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- 댓글 End -->
+
+
+        </div>
+        </div>
     </div>
-</div>
 
-
+<!-- 게시판 End -->
 
 
 <!-- Footer Start -->
@@ -238,22 +283,22 @@ History
                 <h5 class="text-white mb-4">Project Gallery</h5>
                 <div class="row g-2">
                     <div class="col-4">
-                        <img class="img-fluid rounded" th:src="@{/img/gallery-1.jpg}" alt="">
+                        <img class="img-fluid rounded" src="../static/img/gallery-1.jpg" alt="">
                     </div>
                     <div class="col-4">
-                        <img class="img-fluid rounded" th:src="@{/img/gallery-2.jpg}" alt="">
+                        <img class="img-fluid rounded" src="../static/img/gallery-2.jpg" alt="">
                     </div>
                     <div class="col-4">
-                        <img class="img-fluid rounded" th:src="@{/img/gallery-3.jpg}" alt="">
+                        <img class="img-fluid rounded" src="../static/img/gallery-3.jpg" alt="">
                     </div>
                     <div class="col-4">
-                        <img class="img-fluid rounded" th:src="@{/img/gallery-4.jpg}" alt="">
+                        <img class="img-fluid rounded" src="../static/img/gallery-4.jpg" alt="">
                     </div>
                     <div class="col-4">
-                        <img class="img-fluid rounded" th:src="@{/img/gallery-5.jpg}" alt="">
+                        <img class="img-fluid rounded" src="../static/img/gallery-5.jpg" alt="">
                     </div>
                     <div class="col-4">
-                        <img class="img-fluid rounded" th:src="@{/img/gallery-6.jpg}" alt="">
+                        <img class="img-fluid rounded" src="../static/img/gallery-6.jpg" alt="">
                     </div>
                 </div>
             </div>
@@ -291,7 +336,7 @@ History
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script th:src="@{/lib/wow/wow.min.js}"></script>
 <script th:src="@{/lib/easing/easing.min.js}"></script>
 <script th:src="@{/lib/waypoints/waypoints.min.js}"></script>
@@ -299,6 +344,8 @@ History
 <script th:src="@{/lib/owlcarousel/owl.carousel.min.js}"></script>
 <script th:src="@{/lib/isotope/isotope.pkgd.min.js}"></script>
 <script th:src="@{/lib/lightbox/js/lightbox.min.js}"></script>
+
+<script th:src="@{js/extention/choices.js}"></script>
 
 <!-- Template Javascript -->
 <script th:src="@{/js/main.js}"></script>

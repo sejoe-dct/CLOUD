@@ -47,6 +47,7 @@ public class User {
     @Column(name = "user_email" , nullable = false)
     private String email;
 
+
     @Enumerated(EnumType.STRING)
     @Column(length = 10 , nullable = false)
     @ColumnDefault("'ROLE_USER'") // 의미 없음 @persist에 의해서 , 이렇게 해서 얻을 수 있는 이점은 prePersist할때 USER만 들어올  수 있고 , 다른 값이 들어오면 error 뱉는다.

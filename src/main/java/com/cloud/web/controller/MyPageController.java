@@ -64,7 +64,8 @@ public class MyPageController {
         // 2. 자신이 작성한 게시글의 목록을 확인 할 수 있다.
         model.addAttribute("foodBoards", user.getFoodBoardList());
 
-        return "myPage/info";
+        //return "myPage/info";
+        return "myPage/mypage_main";
     }
 
 
@@ -98,7 +99,8 @@ public class MyPageController {
         // foodBoardPostFormDto 에는 id값을 가지고 있지 않음으로 따로 넙겨준다.
         model.addAttribute("id", id);
 
-        return "myPage/updateFoodForm";
+        //return "myPage/updateFoodForm";
+        return "myPage/food_modify";
     }
 
     /**
@@ -123,7 +125,10 @@ public class MyPageController {
         String aa = String.valueOf(id);
 
         return "redirect:/myPage/foods/" + aa;
+        //return "redirect:myPage/mypage_main";
     }
+
+
 
 
 }

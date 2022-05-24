@@ -34,7 +34,7 @@
     <!-- Template Stylesheet -->
     <link th:href="@{/css/style.css}" rel="stylesheet">
     <link th:href="@{/css/test.css}" rel="stylesheet">
-    <link th:href="@{/css/search.css}" rel="stylesheet">
+    <link th:href="@{/css/detail.css}" rel="stylesheet">
 
     <!-- 게시판 -->
     <!--
@@ -44,9 +44,9 @@
     -->
 
     <!-- 검색창 -->
-<!--    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
-<!--    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>-->
-<!--    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    <!--    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+    <!--    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>-->
+    <!--    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
 
 
 </head>
@@ -132,19 +132,20 @@
 Page Header End -->
 
 
-<!-- 게시판 Start -->
+<!-- 마이페이지 Start -->
 <div class="container-xxl py-5">
     <div class="container">
         <!-- 제목 / 소제목 -->
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-            <h6 class="text-primary">축제 및 행사 게시판</h6>
-            <h1 class="mb-4">전국 지역방방곡곡의 축제들을 알려드립니다!</h1>
+            <h6 class="text-primary">마이페이지</h6>
+            <h1 class="mb-4">내가 작성한 게시글</h1>
         </div>
-        <!-- 카테고리 -->
+
+        <hr/>
         <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
             <div class="col-12 text-center">
                 <!-- 검색창 Strart -->
-                <div class="text-end" style="padding:10px;">
+                <!--<div class="text-end" style="padding:10px;">
                     <div class="container">
                         <form th:action="@{/foods}" th:object="${condition}" method="post" >
                             <div class="row">
@@ -179,134 +180,111 @@ Page Header End -->
                             </div>
                         </form>
                     </div>
-                </div>
+                </div>-->
                 <!-- 검색창 End -->
-            </div>
-        </div>
-        <div class="cp33list1" >
-            <ul class="lst1" >
-                <!--1번째 -->
-                <div class="country-item portfolio-item seoul"> <!-- 카테고리 구분 -->
-                    <li class="li1" th:each="board , i : ${foodBoards}" ><div class="w1" >
-                        <!-- 이미지 -->
-                        <div class="w1c1">
-                            <a th:href="@{/foods/{id}(id=${board.id})}" class="figs">
-              <span class="f1">
-                <span class="f1p1">
-                <img  th:each="imageFile : ${board.attachedFiles}" th:src="@{/images/{imageFile}(imageFile=${imageFile.storeFilename})}" >
-                </span>
-              </span>
-                            </a>
-                        </div>
 
-                        <div class="w1c2">
-                            <div class="texts">
-                                <a th:href="@{/foods/{id}(id=${board.id})}" class="tg1">
-                                    <em class="ic1 bsContain " style="background-size: contain;" th:text="${i.count}"></em>
-                                    <strong class="t1" th:text="${board.getTitle()}" ></strong>
+                <!-- 마이페이지 게시판1 Strat -->
+<!--                <<div class="container-fluid">-->
+<!--                    <div class="container text-center">-->
 
-                                    <div class="t2" th:text="${board.getPreview()}"></div>
+<!--                        <div class="row">-->
+<!--                            &lt;!&ndash; 1번째 &ndash;&gt;-->
+<!--                            <div class="col-lg-3" th:each="board , i : ${foodBoards}">-->
+<!--                                <div class="card text-center mb-3">-->
+<!--                                    <div class="py-5 px-4">-->
+<!--                                        <img th:each="imageFile : ${board.attachedFiles}"-->
+<!--                                             th:src="@{/images/{imageFile}(imageFile=${imageFile.storeFilename})}" width=100%, height=100% style="margin-right: 5px"/>-->
+
+<!--                                        <h3 class="fs-6 text-truncate"><a href="#" class="stretched-link text-reset" th:text="${board.getTitle()}"></a></h3>-->
+<!--                                        <span class="text-success" th:text="${board.getPreview()}"></span>-->
+<!--                                    </div>-->
+
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                           &lt;!&ndash; <div class="col-lg-3">-->
+<!--                                <div class="card text-center position-relative mb-3">-->
+<!--                                    <div class="py-5 px-4">-->
+<!--                                        <img src="https://via.placeholder.com/280x280/FFB6C1/000000" alt="" class="img-fluid mb-4" />-->
+<!--                                        <h3 class="fs-6 text-truncate"><a href="#" class="stretched-link text-reset">Wireless Headphones with Noise Cancellation Tru Bass Bluetooth HiFi</a></h3>-->
+<!--                                        <span class="text-success">$250.00</span> <del class="text-muted">$250</del>-->
+<!--                                    </div>-->
+<!--                                    <div class="bg-danger text-white small position-absolute end-0 top-0 px-2 py-2 lh-1 text-center">-->
+<!--                                        <span class="d-block">25%</span>-->
+<!--                                        <span class="d-block">OFF</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-3">-->
+<!--                                <div class="card text-center mb-3">-->
+<!--                                    <div class="py-5 px-4">-->
+<!--                                        <img src="https://via.placeholder.com/280x280/008B8B/000000" alt="" class="img-fluid mb-4" />-->
+<!--                                        <h3 class="fs-6 text-truncate"><a href="#" class="stretched-link text-reset">Smartwatch IP68 Waterproof GPS and Bluetooth Support</a></h3>-->
+<!--                                        <span class="text-success">$29.00</span> <del class="text-muted">$14.50</del>-->
+<!--                                    </div>-->
+<!--                                    <div class="bg-danger text-white small position-absolute end-0 top-0 px-2 py-2 lh-1 text-center">-->
+<!--                                        <span class="d-block">50%</span>-->
+<!--                                        <span class="d-block">OFF</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="col-lg-3">-->
+<!--                                <div class="card text-center mb-3">-->
+<!--                                    <div class="py-5 px-4">-->
+<!--                                        <img src="https://via.placeholder.com/280x280/00CED1/000000" alt="" class="img-fluid mb-4" />-->
+<!--                                        <h3 class="fs-6 text-truncate"><a href="#" class="stretched-link text-reset">Men's Running Shoes</a></h3>-->
+<!--                                        <span class="text-success">$110.00</span> <del class="text-muted">$85.23</del>-->
+<!--                                    </div>-->
+<!--                                    <div class="bg-danger text-white small position-absolute end-0 top-0 px-2 py-2 lh-1 text-center">-->
+<!--                                        <span class="d-block">25%</span>-->
+<!--                                        <span class="d-block">OFF</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>&ndash;&gt;-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <!-- 마이페이지 게시판1 End -->
+
+                <!-- 마이페이지 게시판2 Start -->
+                <div class="container">
+                    <form th:action="@{/myPage/foods/{id}(id=${id})}" th:object="${foodBoardPostFormDto}" method="post" enctype="multipart/form-data" >
+
+                    <div class="portfolioContainer">
+                        <div class="row">
+                        <div class="col-sm-6 col-lg-3 col-md-4 webdesign illustrator" th:each="board , i : ${foodBoards}">
+                            <div class="gal-detail thumb">
+                                <a href="#" class="image-popup" title="Screenshot-1">
+<!--                                    <img src="https://via.placeholder.com/400x280/00BFFF/000000" class="thumb-img" alt="work-thumbnail">-->
+                                    <img th:each="imageFile : ${board.attachedFiles}"
+                                         th:src="@{/images/{imageFile}(imageFile=${imageFile.storeFilename})}"  width=100%, height=100% style="margin-right: 5px"/>
+
                                 </a>
-                                <div class="cp33dlist1">
-                                    <ul class="dl1">
-                                        <li class="di place">
-                                            <b class="dt">
-                                                <i class="ic1"></i>
-                                                <span class="t1">위치</span>
-                                                <span class="sep">:</span></b>
-                                            <span class="dd">
-                      <span class="t2" th:text="${board.getAddress()}"> </span>
-                    </span>
-                                        </li>
-<!--                                        <li class="di calendar">-->
-<!--                                            <b class="dt"><i class="ic1"></i> <span class="t1">기간</span> <span class="sep">:</span></b>-->
-<!--                                            <span class="dd"><span class="t2">2022-05-11 ~ 2022-06-15</span></span>-->
-<!--                                        </li>-->
-                                        <li class="di agency">
-                                            <b class="dt">
-                                                <i class="ic1"></i>
-                                                <span class="t1">작성자</span>
-                                                <span class="sep">:</span>
-                                            </b>
-                                            <span class="dd">
-                      <span class="t2" th:text="${board.getUser().getNickname()}"></span>
-                    </span>
-                                        </li>
-<!--                                        <li class="di phone">-->
-<!--                                            <b class="dt">-->
-<!--                                                <i class="ic1"></i>-->
-<!--                                                <span class="t1">전화번호</span>-->
-<!--                                                <span class="sep">:</span>-->
-<!--                                            </b>-->
-<!--                                            <span class="dd">-->
-<!--                                        <span class="t2">남해관광문화재단 055-864-4515</span>-->
-<!--                                        </span>-->
-<!--                                        </li>-->
-                                    </ul>
+                                <div style="padding: 10px">
+                                <a th:text="${board.getTitle()}" th:href="@{/foods/{id}(id=${board.id})}" ></a>
+                                    <hr/>
+                                <p class="text-muted text-center" th:text="${board.getPreview()}"><small></small></p>
+<!--                                <form th:action="@{/myPage/foods/{id}(id=${id})}" th:object="${foodBoardPostFormDto}" method="post" enctype="multipart/form-data" >-->
+<!--                                </form>-->
+                                <a style="padding: 5px" type="button" class="btn btn-primary" th:href="@{/myPage/foods/{id}(id=${board.getId()})}">수정</a>
+                                <a style="padding: 5px" type="button" class="btn btn-primary" th:href="@{/foodForm}">삭제</a>
                                 </div>
 
                             </div>
                         </div>
-                        <!-- 별점 -->
-                        <div class="w1c3">
-                            <div class="ratings">
-                                <strong class="t1 blind">별점</strong>
-                                <i class="cp33rating1star5">
-                                    <i class="st-on" style="width:100.0%;"><i class="ic1 bsCover" style="background-size: cover;"></i><i class="ic2 bsCover" style="background-size: cover;"></i></i><!-- ☆★(3.5/5) -->
-                                    <i class="st-off"><i class="ic2"></i></i>
-                                </i>
-                                <span class="t2">
-                <span class="blind">점수</span>
-                <span class="t2t1" th:text="${board.getRate()}">5</span>
-                <span class="sep">/</span>
-                <span class="t2t2">5.0</span>
-              </span>
-                                    <span class="t3" >(총 <em class="em" >1개</em> 후기)</span>
-<!--                                <div>총 건수 : <span th:text="${foodCmtDto.getTotalElements()}"></span></div>-->
 
-                            </div>
-                            <!-- 버튼 두개 -->
-<!--                            <div class="cp33btns1">-->
-<!--                                &lt;!&ndash;<a href="?amode=rn%5Ename%5Eins&amp;rn_url=category%3DF0100%26amp%3Bamode%3Dview%26amp%3Bidx%3D191" onclick="doConfirmRealName(this.href);return false;" class="button" data-send-focus="that"><i class="ic1"></i> <span class="t1">스케줄 담기</span></a>&ndash;&gt;-->
-<!--                                <a href="http://map.daum.net/link/to/%EB%8F%85%EC%9D%BC%EB%A7%88%EC%9D%84+%EB%A7%A5%EC%A3%BC%EC%B6%95%EC%A0%9C,34.798675,128.04251009999996" target="_blank" rel="noopener" title="새 창" class="btn btn-primary py-3 px-5 default getdirections"><i class="ic1"></i> <span class="t1">길찾기</span></a>-->
-<!--                            </div>-->
-                        </div>
+
                     </div>
-                    </li>
                 </div>
-
-            </ul>
-
-            <!-- 페이징처리하는 부분-->
-            <div style="padding:10px;">
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-
-                    <li class="page-item " th:classappend="${1 == foodBoards.getPageable().getPageNumber() + 1} ? 'disabled'">
-                        <a class="page-link" th:href="@{/foods(page=${foodBoards.getPageable().getPageNumber() - 1})}" >Previous</a>
-                    </li>
-
-                    <li class="page-item" th:classappend="${i == foodBoards.getPageable().getPageNumber() + 1} ? 'disabled'"
-                        th:each="i : ${#numbers.sequence(startPage, endPage)}">
-                        <a class="page-link" th:href="@{/foods(page=${i - 1})}" th:text="${i}"></a>
-                    </li>
-
-                    <li class="page-item"
-                        th:classappend="${foodBoards.getTotalPages() == foodBoards.getPageable().getPageNumber() + 1} ? 'disabled'">
-                        <a class="page-link" th:href="@{/foods(page=${foodBoards.getPageable().getPageNumber() + 1})}" >Next</a>
-                    </li>
-                </ul>
-            </nav>
-                <div class="text-end">
-                    <a type="button" class="btn btn-primary" th:href="@{/foodForm}">등록</a>
-                </div>
+                <!-- 마이페이지 게시판2 End -->
             </div>
 
+        </form>
         </div>
 
     </div>
 </div>
-<!-- 게시판 End -->
+<!-- 마이페이지 End -->
 
 
 <!-- Footer Start -->
