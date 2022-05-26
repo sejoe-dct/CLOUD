@@ -74,7 +74,7 @@
 
 <!-- Navbar Start -->
 <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
-    <a href="index.html" class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
+    <a th:href="@{/}" class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
         <h2 class="m-0 text-primary">CLOUD</h2>
     </a>
     <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -101,11 +101,13 @@
     <form action="/loginProcess" method="POST">
         <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> 로그인</h1>
 
+        <input style="margin: 5px" type="text" name="username" class="form-control" placeholder="Username 입력" required="" autofocus="">
+        <input style="margin: 5px" type="password" name="password" class="form-control" placeholder="Password 입력" required="">
 
-        <input type="text" name="username" class="form-control" placeholder="Username 입력" required="" autofocus="">
-        <input type="password" name="password" class="form-control" placeholder="Password 입력" required="">
-        <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> 로그인하기</button>
-        <p style="text-align:center"> 또는  </p>
+
+        <button style="align-items: center" class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> 로그인하기</button>
+
+            <p style="text-align:center"> 또는  </p>
         <div class="social-login">
             <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign in with Facebook</span> </button>
             <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign in with Google+</span> </button>
